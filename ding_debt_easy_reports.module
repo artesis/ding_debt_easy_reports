@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Code for the Ding debt easy reports feature.
+ * Code for the Ding debt Nets Easy reports feature.
  */
 
 include_once 'ding_debt_easy_reports.features.inc';
@@ -19,6 +19,15 @@ function ding_debt_easy_reports_menu() {
     'page arguments' => ['ding_debt_easy_reports_admin_mails_settings_form'],
     'access arguments' => array('administer easy reports'),
     'file' => 'includes/ding_debt_easy_reports.admin.inc',
+  );
+
+  $items['admin/config/payment/ding_debt_easy/reports/%/' . DING_DEBT_EASY_STATUS_COMPLETED] = array(
+    'title' => 'Update record status',
+    'type' => MENU_CALLBACK,
+    'page callback' => 'ding_debt_easy_reports_ajax_update_status',
+    'page arguments' => [5, 6],
+    'access arguments' => array('administer easy reports'),
+    'delivery callback' => 'ajax_deliver',
   );
 
   return $items;
@@ -71,6 +80,30 @@ function ding_debt_easy_reports_cron() {
 }
 
 /**
+ * Ajax menu callback used to change status on local order.
+ *
+ * @param string $id
+ *   Order id.
+ * @param string $status
+ *   Status to set.
+ *
+ * @return array
+ *   Ajax command array.
+ */
+function ding_debt_easy_reports_ajax_update_status($id, $status) {
+  _ding_debt_easy_update_status_local($id, $status);
+
+  ctools_include('ajax');
+  $commands = [];
+  $commands[] = ctools_ajax_command_redirect('/admin/config/payment/ding_debt_easy/reports');
+
+  return array(
+    '#type' => 'ajax',
+    '#commands' => $commands,
+  );
+}
+
+/**
  * Send mail report based on configuration and last sent mail-
  */
 function _ding_debt_easy_reports_cron_mail() {
@@ -83,7 +116,7 @@ function _ding_debt_easy_reports_cron_mail() {
 
   // Check if hour/min is correct in relation to config for last run.
   if ($last_run->format('H') !== $config['cron']['hour'] || $last_run->format('i') !== $config['cron']['minute']) {
-    // Either this is the first run or the configured time have been changed.
+    // Either this is the first run or the configured time has been changed.
     $last_run = $last_run->setTime($config['cron']['hour'], $config['cron']['minute']);
   }
 

@@ -140,6 +140,11 @@ function ding_debt_easy_reports_views_default_views() {
   $handler->display->display_options['fields']['retries']['id'] = 'retries';
   $handler->display->display_options['fields']['retries']['table'] = 'ding_debt_easy';
   $handler->display->display_options['fields']['retries']['field'] = 'retries';
+  /* Field: Ding Debt Easy: Actions */
+  $handler->display->display_options['fields']['actions']['id'] = 'actions';
+  $handler->display->display_options['fields']['actions']['table'] = 'ding_debt_easy';
+  $handler->display->display_options['fields']['actions']['field'] = 'actions';
+  $handler->display->display_options['fields']['actions']['label'] = 'Action';
   /* Sort criterion: Ding Debt Easy: Changed date */
   $handler->display->display_options['sorts']['changed']['id'] = 'changed';
   $handler->display->display_options['sorts']['changed']['table'] = 'ding_debt_easy';
@@ -227,11 +232,11 @@ function ding_debt_easy_reports_views_default_views() {
     t('<h3>Status forklaring</h3>
 
 <ul>
-<li><strong>Created</strong>: betaling opret ved Nets for at kan viderestille brugeren. Brugeren har <strong>ikke</strong> oplyst kort information endnu</li>
-<li><strong>Reserved</strong>: betaling reserveret på brugerens kort.</li>
-<li><strong>Pending</strong>: betaling reserveret på brugerens kort men ikke lykkes endnu at gennemføre mod FBS</li>
-<li><strong>Completed</strong>: betaling gennemført og afsluttet.</li>
-<li><strong>Failed</strong>: betaling er fejlet (men store sikkerhed ved FBS). Betaling reserveret endnu.</li>
+<li><strong>Created</strong>: Betaling oprettet ved Nets for at kunne viderestille brugeren. Brugeren har <strong>ikke</strong> oplyst kort information endnu</li>
+<li><strong>Reserved</strong>: Betaling reserveret på brugerens kort.</li>
+<li><strong>Pending</strong>: Betaling reserveret på brugerens kort men ikke lykkes endnu at gennemføre mod FBS</li>
+<li><strong>Completed</strong>: Betaling gennemført og afsluttet.</li>
+<li><strong>Failed</strong>: Betaling er fejlet (men store sikkerhed ved FBS). Betaling reserveret endnu.</li>
 </ul>
 '),
     t('.'),
@@ -242,6 +247,7 @@ function ding_debt_easy_reports_views_default_views() {
     t('Date'),
     t('Status'),
     t('Retries'),
+    t('Action'),
     t('Reports'),
     t('Administrative payment reports'),
   );
