@@ -1,6 +1,7 @@
 name = Ding debt Easy reports
 description = Payment reports for Nets Easy payments
 core = 7.x
+version = 7.x-5.0.0
 package = Ding!
 dependencies[] = ding_debt_easy
 dependencies[] = htmlmail
